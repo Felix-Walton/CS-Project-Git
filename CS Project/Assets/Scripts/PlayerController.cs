@@ -15,27 +15,33 @@ public class PlayerController : MonoBehaviour
 
     public GunController theGun;
 
-    public GameObject canvas;
+    public GameObject pauseCanvas;
 
+    public float frequency;
+    public float range;
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!canvas.GetComponent<pauseMenu>().GameIsPaused) // Only allows movement and shooting when the game is paused 
+        if (!pauseCanvas.GetComponent<pauseMenu>().GameIsPaused) // Only allows movement and shooting when the game is paused 
         {
             Movement(); // The movement function  
 
             Shooting(); //The shooting function
+
+            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range)+1.5f, transform.position.z);
         }
     }
 
+ 
 
     private void Shooting()
     {
@@ -67,6 +73,5 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() 
     {
         myRigidbody.velocity = moveVelocity;
-
     }
 }

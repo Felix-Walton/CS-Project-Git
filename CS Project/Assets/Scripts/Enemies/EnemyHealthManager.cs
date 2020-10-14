@@ -11,12 +11,19 @@ public class EnemyHealthManager : MonoBehaviour
     private float flashCounter;
 
     private Renderer rend; // componant used to change the enemy’s colour
+    private Renderer arm1Rend;
+    private Renderer arm2Rend;
     private Color storedColor;
+
+    public GameObject arm1;
+    public GameObject arm2;
 
     void Start()
     {
         currentHealth = health; // sets the enemy health to the set health value
         rend = GetComponent<Renderer>();
+        arm1Rend = arm1.GetComponent<Renderer>();
+        arm2Rend = arm2.GetComponent<Renderer>();
         storedColor = rend.material.GetColor("_Color");
     }
 
@@ -34,6 +41,9 @@ public class EnemyHealthManager : MonoBehaviour
             if (flashCounter <= 0)
             {
                 rend.material.SetColor("_Color", storedColor);
+                arm1Rend.material.SetColor("_Color", storedColor);
+                arm2Rend.material.SetColor("_Color", storedColor);
+
             }
         }
     }
@@ -43,5 +53,7 @@ public class EnemyHealthManager : MonoBehaviour
         currentHealth -= 1;
         flashCounter = flashLengh; // triggers a countdown to get the 
         rend.material.SetColor("_Color", Color.red); // this changes the colour of the enemy to red 
+        arm1Rend.material.SetColor("_Color", Color.red);
+        arm2Rend.material.SetColor("_Color", Color.red);
     }
 }

@@ -226,8 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  thePlayer: {fileID: 3329398719871827560, guid: 31d5297762373d140a1bc0a2c3da35a3,
-    type: 3}
+  thePlayer: {fileID: 7825065016960709541, guid: 0949ee26951269f4ea7cb07e340eb56e, type: 3}
 --- !u!114 &4353262633825855498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   flashLengh: 0.1
+  arm1: {fileID: 4353262634917910773}
+  arm2: {fileID: 4353262633824360604}
 --- !u!1 &4353262634704864739
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +313,7 @@ GameObject:
   - component: {fileID: 4353262634917910768}
   - component: {fileID: 4353262634917910775}
   m_Layer: 0
-  m_Name: Arm
+  m_Name: 'Arm 1 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

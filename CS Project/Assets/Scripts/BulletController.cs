@@ -6,9 +6,12 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
 
+    private bool used;
+
     void Start()
     {
-        Destroy(gameObject, 5); // destroys the game object after 5 seconds
+        // Destroy(gameObject, 5); // destroys the game object after 5 seconds
+        used = false;
     }
 
     void Update()
@@ -18,16 +21,21 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-         if (other.gameObject.tag == "Enemy") // If colided with enemy, hurts the enemy and then deletes  
+        if (used == false)
         {
-            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(); // Calls the hurt enemy function
-            Destroy(gameObject);
-        }
-        if (other.gameObject.tag == "Player") // If colided with player, hurts the player and then deletes  
-        {
-            other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(); // Calls the hurt enemy function
-            Destroy(gameObject);
-            
+            used = true;
+            if (other.gameObject.tag == "Enemy") // If colided with enemy, hurts the enemy and then deletes  
+            {
+                Destroy(gameObject);
+                other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(); // Calls the hurt enemy function
+            }
+            else if (other.gameObject.tag == "Player") // If colided with player, hurts the player and then deletes  
+            {
+                Debug.Log("hit");
+                Destroy(gameObject);
+                other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(); // Calls the hurt enemy function
+
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
             Shooting(); //The shooting function
 
-            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range)+1.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range)+1.2f, transform.position.z);
         }
     }
 

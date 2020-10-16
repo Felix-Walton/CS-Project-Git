@@ -8,6 +8,6 @@ public class CamMovement : MonoBehaviour
 
     void Update()     // moves the Camera to always be the same position relative to the player
     {
-        GameObject.Find("Main Camera").transform.position = new Vector3 (point.position.x, point.position.y + 11, point.position.z - 10); 
+        GameObject.Find("Main Camera").transform.position = new Vector3 (point.position.x, 11, point.position.z - 10); 
     }
 }

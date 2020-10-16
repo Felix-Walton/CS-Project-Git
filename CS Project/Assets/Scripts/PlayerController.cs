@@ -19,13 +19,14 @@ public class PlayerController : MonoBehaviour
 
     public float frequency;
     public float range;
+    private float distanceFromFloor;
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
-
+        distanceFromFloor = transform.position.y;
     }
 
     // Update is called once per frame
@@ -34,14 +35,11 @@ public class PlayerController : MonoBehaviour
         if (!pauseCanvas.GetComponent<pauseMenu>().GameIsPaused) // Only allows movement and shooting when the game is paused 
         {
             Movement(); // The movement function  
-
             Shooting(); //The shooting function
-
-            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range)+1.2f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range)+distanceFromFloor, transform.position.z);
         }
     }
 
- 
 
     private void Shooting()
     {
@@ -64,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         if (groundPlane.Raycast(camraRay, out rayLength))
         {
-            Vector3 pointToLook = camraRay.GetPoint(rayLength - 2);
+            Vector3 pointToLook = camraRay.GetPoint(rayLength);
             Debug.DrawLine(camraRay.origin, pointToLook, Color.blue);
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z)); // The player points where the raycast intersect the ground plane
         }

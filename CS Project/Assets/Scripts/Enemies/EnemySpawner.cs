@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour //This system will almost definatly be
     public float spawnTime;
 
     public Vector3 position;
-    public EnemyController enemy;
+    public ZombieController enemy;
     public ShooterControler shooter;
     private float spawnCount;
     private int random;
@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour //This system will almost definatly be
                 random = Random.Range(1, 4);
                 if (random <= 2)    // chooses a random enemy to spawn, currently bias towards zombies over shooters
                 {
-                    EnemyController newEnemy = Instantiate(enemy, position, Quaternion.identity) as EnemyController;
+                    ZombieController newEnemy = Instantiate(enemy, position, Quaternion.identity) as ZombieController;
                 }
                 else
                 {

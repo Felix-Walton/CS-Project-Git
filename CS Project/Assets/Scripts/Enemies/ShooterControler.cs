@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShooterControler : MonoBehaviour
 {
     private Rigidbody myRB;
-    private PlayerController thePlayer;
+    public PlayerController thePlayer;
 
     public float waitTime;
     private float currentTime;
@@ -16,15 +16,20 @@ public class ShooterControler : MonoBehaviour
     public float bulletSpeed;
     private float bulletTimer;
 
+    public float frequency;
+    public float range;
+    public float height;
+
+
     void Start()
     {
-        myRB = GetComponent<Rigidbody>();
-        thePlayer = FindObjectOfType<PlayerController>();
+       myRB = GetComponent<Rigidbody>();
+       thePlayer = FindObjectOfType<PlayerController>();
     }
 
     void Update()
     {
-        transform.LookAt(thePlayer.transform.position);
+        transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
         currentTime += Time.deltaTime;
 
         if (currentTime >= 8) // Resets the timers
@@ -38,6 +43,7 @@ public class ShooterControler : MonoBehaviour
         if (currentTime <= 8 & currentTime > 5) // Moving state
         {
             myRB.velocity = (transform.forward * 4);
+            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range) +height, transform.position.z);
         }
 
         if (currentTime <= 5) // shooting state
@@ -48,6 +54,8 @@ public class ShooterControler : MonoBehaviour
                 Shoot();
                 bulletTimer = 0;
             }
+            myRB.velocity = Vector3.zero;
+            myRB.angularVelocity = Vector3.zero;
         }
     }
 

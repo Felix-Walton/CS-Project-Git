@@ -9,13 +9,12 @@ public class PlayerHealthManager : MonoBehaviour
     public int startingHealth;
     public int currentHealth;
 
-    public float flashLengh;
-    private float flashCounter;
-
     private Renderer rend;
     private Color storedColor;
-
     public GameObject healthDisplay;
+
+    private bool invulnerable = false;
+    private float vulnerableTime = 1;
 
     void Start()
     {
@@ -32,22 +31,27 @@ public class PlayerHealthManager : MonoBehaviour
             Invoke("LoadMenu", 2f); // Loads the scene again after 2 secconds
         }
 
-        if (flashCounter > 0) // This changes the colour of the enemy back to normal after the set amount of time
+        if (invulnerable == true) // makes player invunrible for 3 secconds
         {
-            flashCounter -= Time.deltaTime;
-            if(flashCounter <= 0)
+            vulnerableTime -= Time.deltaTime;
+            if(vulnerableTime<= 0)
             {
                 rend.material.SetColor("_Color", storedColor);
+                invulnerable = false;
+                vulnerableTime = 1;
             }
         }
     }
-
+    
     public void HurtPlayer() // Function that gets called when to damage the player
     {
-        currentHealth -=1;
-        flashCounter = flashLengh;  // Starts a contdown to change the colour back
-        rend.material.SetColor("_Color", Color.red);
-        healthDisplay.gameObject.GetComponent<Hearts>().Damage();
+        if (invulnerable == false)
+        {
+            rend.material.SetColor("_Color", Color.red);
+            invulnerable = true;
+            currentHealth -= 1;
+            healthDisplay.gameObject.GetComponent<Hearts>().Damage();
+        }
     }
 
     void LoadMenu()

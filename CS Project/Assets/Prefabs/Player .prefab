@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992490685781440441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8450738, y: -1.1002027, z: 2.0497246}
+  m_LocalPosition: {x: 1.8450738, y: -1.011, z: 2.0497246}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 622181882058448649}
@@ -1477,7 +1477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88db92d9a3eaf9d4abac0e0d18f46fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
+  startingHealth: 500
   currentHealth: 0
   flashLengh: 0.2
   healthDisplay: {fileID: 0}
@@ -1496,6 +1496,8 @@ MonoBehaviour:
   moveSpeed: 7
   theGun: {fileID: 7825065018705238683}
   pauseCanvas: {fileID: 0}
+  frequency: 0.7
+  range: 3.5
 --- !u!1 &7825065017141579361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825065018705238682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.593, y: 0.06, z: 0.407}
+  m_LocalPosition: {x: 0.593, y: 0.05, z: 0.407}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7825065018497812148}
@@ -2680,7 +2682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.522
+      value: -0.269
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2728,7 +2730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.626732
+      value: 6.2089067
       objectReference: {fileID: 0}
     - target: {fileID: 198000012285952742, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -2766,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.522
+      value: -0.269
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2814,7 +2816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014107537954, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.626732
+      value: 6.1391687
       objectReference: {fileID: 0}
     - target: {fileID: 198000012285952742, guid: 93170d2c6bae948ca90b9b8188e02816, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState

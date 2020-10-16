@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4353262633825855497}
   - component: {fileID: 4353262633825855498}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,6 +227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   thePlayer: {fileID: 7825065016960709541, guid: 0949ee26951269f4ea7cb07e340eb56e, type: 3}
+  frequency: 0.1
+  range: 6
+  height: 0.1
 --- !u!114 &4353262633825855498
 MonoBehaviour:
   m_ObjectHideFlags: 0

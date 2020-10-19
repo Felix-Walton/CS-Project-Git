@@ -20,6 +20,8 @@ public class EnemyHealthManager : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(1);
+
         currentHealth = health; // sets the enemy health to the set health value
         rend = GetComponent<Renderer>();
         arm1Rend = arm1.GetComponent<Renderer>();
@@ -31,6 +33,7 @@ public class EnemyHealthManager : MonoBehaviour
     {
         if(currentHealth <= 0) // Checking for death
         {
+            GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(-1);
             Destroy(gameObject); // Destroys this enemy
             GameObject.Find("Score").GetComponent<Score>().Point(); // Calls a function on the score script that adds 1 point to the score and displays it
         }

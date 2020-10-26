@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float moveSpeed;
     private Rigidbody myRigidbody;
 
@@ -21,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public float range;
     private float distanceFromFloor;
 
-    // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
@@ -29,7 +27,6 @@ public class PlayerController : MonoBehaviour
         distanceFromFloor = transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!pauseCanvas.GetComponent<pauseMenu>().GameIsPaused) // Only allows movement and shooting when the game is paused 

@@ -56,7 +56,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     void LoadMenu()
     {
-        SceneManager.LoadScene(0); // Loads scene again
+        SceneManager.LoadScene(0); // Loads menu scene
     }
 }
 

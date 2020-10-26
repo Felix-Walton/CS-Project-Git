@@ -26,9 +26,6 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(); // Calls the hurt enemy function
         }
-
-        else if (collision.gameObject.tag == "Bullet") { } // This if statment means colliding bullets wont get destroyed
-
         else
         {
             Destroy(gameObject);

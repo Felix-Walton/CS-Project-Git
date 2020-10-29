@@ -28,6 +28,9 @@ public class RoomManager : MonoBehaviour
 
        if (transform.position.y > targetHeight)
        { transform.position = new Vector3(transform.position.x, transform.position.y -0.5f, transform.position.z); }
+
+        if (transform.position.y == -63)
+        { Destroy(gameObject); }
     }
 
     private void openEntrance()
@@ -38,6 +41,8 @@ public class RoomManager : MonoBehaviour
 
     public void roomFinish()
     {
+        GameObject.Find("Score").GetComponent<Score>().Point();
+
         gameObject.transform.Find("Exit").GetComponent<doorManagment>().Open();
 
         Instantiate(Rooms[Random.Range(0, Rooms.Length)], (gameObject.transform.Find("New Room Locator").position), Quaternion.identity);

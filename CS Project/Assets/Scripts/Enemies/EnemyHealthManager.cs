@@ -35,7 +35,7 @@ public class EnemyHealthManager : MonoBehaviour
         {
             GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(-1);
             Destroy(gameObject); // Destroys this enemy
-            GameObject.Find("Score").GetComponent<Score>().Point(); // Calls a function on the score script that adds 1 point to the score and displays it
+            //GameObject.Find("Score").GetComponent<Score>().Point(); // Calls a function on the score script that adds 1 point to the score and displays it
         }
 
         if (flashCounter > 0) // this changes the colour of the enemy back to normal after the set amount of time

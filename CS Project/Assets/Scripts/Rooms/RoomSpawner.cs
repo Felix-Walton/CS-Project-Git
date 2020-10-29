@@ -28,7 +28,7 @@ public class RoomSpawner : MonoBehaviour
     public void Startspawning()
     {
         enemyCounter = 5;    // These two perametes control the amount of enemies, and the time between spawning
-        spawnTimerSet = 2f; // They will be changed to scale depending on the score
+        spawnTimerSet = 1.5f; // They will be changed to scale depending on the score
     }
 
     void Update()

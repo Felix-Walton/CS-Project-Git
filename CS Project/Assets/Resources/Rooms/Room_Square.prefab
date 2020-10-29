@@ -362,8 +362,6 @@ MonoBehaviour:
   - {fileID: 3914241900932913844}
   getSpawnpoints: {fileID: 5554558381189373286}
   particle: {fileID: 1107735493590821297, guid: 99b461f0f590dac45a369eac6252b946, type: 3}
-  enemy: {fileID: 4353262633825855497, guid: 645e197e4dd64ae4584f7d4a0f1276a6, type: 3}
-  shooter: {fileID: -5560331885245748581, guid: c3a3a304026d865488dedd79a25e0847, type: 3}
 --- !u!114 &3914241901551244841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23562,7 +23560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5779940033952859862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 6}
+  m_LocalPosition: {x: -4, y: 0, z: 6.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3914241901551244843}

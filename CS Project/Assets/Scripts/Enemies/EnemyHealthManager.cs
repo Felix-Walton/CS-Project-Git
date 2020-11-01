@@ -18,15 +18,19 @@ public class EnemyHealthManager : MonoBehaviour
     public GameObject arm1;
     public GameObject arm2;
 
+
     void Start()
     {
-        GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(1);
+        //GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(1);
 
         currentHealth = health; // sets the enemy health to the set health value
         rend = GetComponent<Renderer>();
         arm1Rend = arm1.GetComponent<Renderer>();
         arm2Rend = arm2.GetComponent<Renderer>();
         storedColor = rend.material.GetColor("_Color");
+
+
+
     }
 
     void Update()
@@ -34,8 +38,11 @@ public class EnemyHealthManager : MonoBehaviour
         if(currentHealth <= 0) // Checking for death
         {
             GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(-1);
-            Destroy(gameObject); // Destroys this enemy
-            //GameObject.Find("Score").GetComponent<Score>().Point(); // Calls a function on the score script that adds 1 point to the score and displays it
+            GameObject.Find("GameManager").GetComponent<GameManagment>().EnenmyKill(); // Calls a function on the score script that adds 1 point to the score and displays it
+
+
+            //Destroy(gameObject); // Destroys this enemy
+
         }
 
         if (flashCounter > 0) // this changes the colour of the enemy back to normal after the set amount of time
@@ -46,7 +53,7 @@ public class EnemyHealthManager : MonoBehaviour
                 rend.material.SetColor("_Color", storedColor);
                 arm1Rend.material.SetColor("_Color", storedColor);
                 arm2Rend.material.SetColor("_Color", storedColor);
-
+                
             }
         }
     }
@@ -58,5 +65,6 @@ public class EnemyHealthManager : MonoBehaviour
         rend.material.SetColor("_Color", Color.red); // this changes the colour of the enemy to red 
         arm1Rend.material.SetColor("_Color", Color.red);
         arm2Rend.material.SetColor("_Color", Color.red);
+
     }
 }

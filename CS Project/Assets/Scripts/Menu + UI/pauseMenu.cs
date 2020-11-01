@@ -10,9 +10,13 @@ public class pauseMenu : MonoBehaviour
 {
     public  bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject deathScreen;
     public AudioMixer audioMixer;
     private float currentVolume;
     public Slider slider;
+    public Text finalScoreDisplay;
+
+    private int finalScore;
 
     void Start()
     {
@@ -37,7 +41,7 @@ public class pauseMenu : MonoBehaviour
 
     void Pause() 
     {
-        pauseMenuUI.SetActive(true); // deactivates the menu
+        pauseMenuUI.SetActive(true); // activates the menu
         Time.timeScale = 0f; // Pauses the game
         GameIsPaused = true;
     }
@@ -61,8 +65,32 @@ public class pauseMenu : MonoBehaviour
         Debug.Log("quit");
     }
 
+
+
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("Volume", volume);
+    }
+
+    public void Replay()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Game");
+    }
+
+    public void death()
+    {
+        deathScreen.SetActive(true); // activates death screen
+        Time.timeScale = 0f; // Pauses the game
+        GameIsPaused = true;
+
+        finalScore = int.Parse(GameObject.Find("GameManager").GetComponent<GameManagment>().scoreText.text);
+
+        finalScoreDisplay.text = finalScore.ToString(); // displays the final score
+
+        if (finalScore > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", finalScore); // saves the new high score, if it is higher
+        }
     }
 }

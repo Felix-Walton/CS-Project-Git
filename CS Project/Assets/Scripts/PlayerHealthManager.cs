@@ -27,8 +27,8 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(currentHealth <= 0) // Checking for death
         {
-            gameObject.SetActive(false); // Deletes the player TTODO something other than deleting the player
-            Invoke("LoadMenu", 2f); // Loads the scene again after 2 secconds
+            gameObject.SetActive(false);
+            Invoke("Death", 0.5f); // Loads the scene again after 2 secconds
         }
 
         if (invulnerable == true) // makes player invunrible for 3 secconds
@@ -54,9 +54,9 @@ public class PlayerHealthManager : MonoBehaviour
         }
     }
 
-    void LoadMenu()
+    void Death()
     {
-        SceneManager.LoadScene(0); // Loads menu scene
+        GameObject.Find("Pause canvas").GetComponent<pauseMenu>().death();
     }
 }
 

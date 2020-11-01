@@ -8,7 +8,7 @@ public class startDeletion : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            gameObject.transform.parent.gameObject.transform.parent.GetComponent<startController>().targetHeight = -63;
+            Destroy(gameObject.transform.parent.gameObject.transform.parent.gameObject);
         }
     }
 }

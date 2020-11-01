@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107735493590821297}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 18, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4827,3 +4827,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombie: {fileID: 4353262633825855497, guid: 645e197e4dd64ae4584f7d4a0f1276a6, type: 3}
   shooter: {fileID: -5560331885245748581, guid: c3a3a304026d865488dedd79a25e0847, type: 3}
+  runner: {fileID: 8588494792917692511, guid: a5f960aca4cdbc74f8a1a80cb39165d1, type: 3}
+  shotgunner: {fileID: 4145190140530721879, guid: 3b7aab38ebe491c4288994c56e72e69b, type: 3}

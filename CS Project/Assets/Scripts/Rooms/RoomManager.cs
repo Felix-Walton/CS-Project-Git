@@ -4,47 +4,49 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-
     public Transform bridge;
     public static GameObject[] Rooms;
 
-    public int targetHeight = -1;
+    private int targetHeight;
+
+    private Transform toMove;
+
 
     private void Start()
     {
-        Instantiate(bridge, gameObject.transform.Find("Bridge Locator"));
-
         Rooms = Resources.LoadAll<GameObject>("Rooms");
 
-        transform.position = new Vector3 (transform.position.x, transform.position.y - 62, transform.position.z);
+        targetHeight = 29;
 
-        Invoke("openEntrance", 3f);
+        toMove = gameObject.transform.Find("To Move");
+        Instantiate(bridge, toMove.transform.Find("Bridge Locator"));
+
+        toMove.transform.position = new Vector3 (toMove.transform.position.x, 29, toMove.transform.position.z);
+    }
+
+    private void Update()
+    {
+        if (GameObject.Find("GameManager").GetComponent<GameManagment>().roomJustCleared == true)
+        {
+
+            if (toMove.transform.position.y == 29)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManagment>().roomJustCleared = false;
+                targetHeight = -1;
+                Invoke("openEntrance", 2.5f);
+            }
+        }
     }
 
     void FixedUpdate()
     {
-       if (transform.position.y < targetHeight)
-        { transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z); }
-
-       if (transform.position.y > targetHeight)
-       { transform.position = new Vector3(transform.position.x, transform.position.y -0.5f, transform.position.z); }
-
-        if (transform.position.y == -63)
-        { Destroy(gameObject); }
+        if (toMove.transform.position.y > targetHeight)
+       { toMove.transform.position = new Vector3(toMove.transform.position.x, toMove.transform.position.y - 0.25f, toMove.transform.position.z); }
     }
 
     private void openEntrance()
     {
-        gameObject.transform.Find("Entrance").GetComponent<doorManagment>().Open();
-    }
-
-
-    public void roomFinish()
-    {
-        GameObject.Find("Score").GetComponent<Score>().Point();
-
-        gameObject.transform.Find("Exit").GetComponent<doorManagment>().Open();
-
-        Instantiate(Rooms[Random.Range(0, Rooms.Length)], (gameObject.transform.Find("New Room Locator").position), Quaternion.identity);
+        toMove.transform.Find("Entrance").GetComponent<doorManagment>().Open();
+        Instantiate(Rooms[Random.Range(0, Rooms.Length)], (toMove.transform.Find("New Room Locator").position), Quaternion.identity);
     }
 }

@@ -10,16 +10,19 @@ public class RoomSpawner : MonoBehaviour
     private GameObject newParticle;
 
 
-    private Vector3 spawnPosition;
+    private Transform spawnPosition;
 
-    private int enemyCounter = -1;
+    public int enemyCounter;
     private float spawnTimer = 0;
     private float spawnTimerSet;
 
 
+    private int roomsCleared;
+
 
     void Start()
     {
+        enemyCounter = -1;
         Spawnpoints = new GameObject[getSpawnpoints.transform.childCount]; // These 3 lines put the game spawn points in an array
         for (int i = 0; i < getSpawnpoints.transform.childCount; i++)
         { Spawnpoints[i] = getSpawnpoints.transform.GetChild(i).gameObject; }
@@ -27,8 +30,12 @@ public class RoomSpawner : MonoBehaviour
 
     public void Startspawning()
     {
-        enemyCounter = 5;    // These two perametes control the amount of enemies, and the time between spawning
-        spawnTimerSet = 1.5f; // They will be changed to scale depending on the score
+        roomsCleared = GameObject.Find("GameManager").GetComponent<GameManagment>().roomsClearedCount;
+        enemyCounter = roomsCleared+1; // sets the enemy amount to spawn to room count
+
+
+        spawnTimerSet = 1.5f - (roomsCleared / 10f);
+        if (spawnTimerSet <= 0.6) { spawnTimerSet = 0.6f; } // decreases spawn timer based on score with a minimum of every 0.5 secconds 
     }
 
     void Update()
@@ -40,13 +47,15 @@ public class RoomSpawner : MonoBehaviour
             {
                 SpawnEnemy(); // The spawning function
                 spawnTimer = spawnTimerSet; // resets the timer
+                enemyCounter -= 1;
             }
         }
         else if (enemyCounter == 0)
         {
             if (GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCount == 0)
             {
-                GetComponent<RoomManager>().roomFinish();
+                GameObject.Find("GameManager").GetComponent<GameManagment>().RoomCleared();
+                gameObject.transform.Find("To Move").gameObject.transform.Find("Exit").GetComponent<doorManagment>().Open();
                 GetComponent<RoomSpawner>().enabled = false;
             }
         }
@@ -54,13 +63,13 @@ public class RoomSpawner : MonoBehaviour
 
     public void SpawnEnemy() // Finds the spawn position and creates a particle effect
     {
-        spawnPosition = Spawnpoints[Random.Range(0, Spawnpoints.Length)].transform.position;
-        newParticle = Instantiate(particle, new Vector3 (spawnPosition.x, 0.05f , spawnPosition.z), Quaternion.Euler(-90,0,0));
+        spawnPosition = Spawnpoints[Random.Range(0, Spawnpoints.Length)].transform;
+        newParticle = Instantiate(particle, spawnPosition);
         Invoke("EnemyDelay", 1f);
     }
 
     private void EnemyDelay() // Updates the count at the correct time
     {
-        enemyCounter -= 1;
+        //enemyCounter -= 1;
     }
 }

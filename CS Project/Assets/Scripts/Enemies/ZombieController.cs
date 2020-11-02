@@ -13,6 +13,9 @@ public class ZombieController : MonoBehaviour
     public float range;
     public float height;
 
+
+
+
     void Start()
     {
         myRB = GetComponent <Rigidbody>();
@@ -21,11 +24,17 @@ public class ZombieController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z)); // point towards the player
+        rotate();
 
         myRB.velocity = (transform.forward * moveSpeed); // move forwards
 
-        transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / frequency) / range) + height, transform.position.z);
+        myRB.MovePosition(new Vector3(transform.position.x, (Mathf.Sin((Time.time) / frequency) / range) + height, transform.position.z));
+    }
 
+    void rotate()
+    {
+        var qTo = Quaternion.LookRotation(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z) - transform.position);
+        qTo = Quaternion.Slerp(transform.rotation, qTo, 100f * Time.deltaTime);
+        myRB.MoveRotation(qTo);
     }
 }

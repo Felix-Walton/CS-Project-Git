@@ -9,8 +9,6 @@ public class runnerController : MonoBehaviour
 
     public float waitTime;
     private float currentTime;
-    public Transform firePoint;
-    public BulletController bullet;
 
     public float frequency;
     public float range;
@@ -21,34 +19,41 @@ public class runnerController : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody>();
         thePlayer = FindObjectOfType<PlayerController>();
-        transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
-        currentTime = 0.5f;
+        rotate();      
+        currentTime = 1f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         currentTime += Time.deltaTime;
 
         if (currentTime <= 1 & currentTime > 0) // still state
         {
-            transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
+            rotate();
             myRB.velocity = Vector3.zero;
             myRB.angularVelocity = Vector3.zero;
         }
-        if (currentTime <= 3 & currentTime > 1) // Moving back state
+        if (currentTime <= 2 & currentTime > 1) // Moving back state
         {
-            transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
-            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / frequency) / range * 2) + height, transform.position.z);
+            rotate();
+            myRB.MovePosition(transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / (frequency)) / range) + height, transform.position.z));
             myRB.velocity = (transform.forward * -1);
         }
-        if (currentTime <= 4 & currentTime > 3) // Dashes forward
+        if (currentTime <= 3 & currentTime > 2) // Dashes forward
         {
-            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / (frequency/ 2)) / range) + height, transform.position.z);
-            myRB.velocity = (transform.forward * 13);
+            myRB.MovePosition(new Vector3(transform.position.x, (Mathf.Sin((Time.time) / (frequency / 2)) / range * 2) + height, transform.position.z));
+            myRB.velocity = (transform.forward * 15);
         }
-        if (currentTime >= 4) // Resets the timers
+        if (currentTime >= 3) // Resets the timers
         {
             currentTime = 0.5f;
         }
+    }
+
+    void rotate()
+    {
+        var qTo = Quaternion.LookRotation(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z) - transform.position);
+        qTo = Quaternion.Slerp(transform.rotation, qTo, 100f * Time.deltaTime);
+        myRB.MoveRotation(qTo);
     }
 }

@@ -29,10 +29,10 @@ public class shotgunnerController : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
+        rotate();
         currentTime += Time.deltaTime;
         myRB.velocity = (transform.forward * 0.8f);
-        transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / frequency) / range) + height, transform.position.z);
+        myRB.MovePosition(transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / (frequency)) / range) + height, transform.position.z));
 
         if (currentTime <= 1.3) // shooting state
         {
@@ -62,5 +62,12 @@ public class shotgunnerController : MonoBehaviour
         newBullet.speed = bulletSpeed;
         newBullet2.speed = bulletSpeed;
         newBullet3.speed = bulletSpeed;
+    }
+
+    void rotate()
+    {
+        var qTo = Quaternion.LookRotation(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z) - transform.position);
+        qTo = Quaternion.Slerp(transform.rotation, qTo, 100f * Time.deltaTime);
+        myRB.MoveRotation(qTo);
     }
 }

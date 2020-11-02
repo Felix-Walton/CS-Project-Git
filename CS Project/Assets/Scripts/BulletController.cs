@@ -11,10 +11,11 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, 5); // destroys the game object after 5 seconds
-        rb.AddForce(transform.forward * speed *100); // Moves the bullet forward
+        rb.AddForce(transform.forward * speed * 100); // Moves the bullet forward
     }
 
-    void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy") // If colided with enemy, hurts the enemy and then deletes  
         {

@@ -11,12 +11,16 @@ public class EnemyHealthManager : MonoBehaviour
     private float flashCounter;
 
     private Renderer rend; // componant used to change the enemy’s colour
-    private Renderer arm1Rend;
-    private Renderer arm2Rend;
-    private Color storedColor;
+    private Renderer bodyPart1;
+    private Renderer bodyPart2;
+    private Color storedColor1;
+    private Color storedColor2;
 
-    public GameObject arm1;
-    public GameObject arm2;
+
+    public GameObject bodyPart1_;
+    public GameObject bodyPart2_;
+
+    public GameObject deathParticles;
 
 
     void Start()
@@ -24,12 +28,10 @@ public class EnemyHealthManager : MonoBehaviour
         //GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(1);
 
         currentHealth = health; // sets the enemy health to the set health value
-        rend = GetComponent<Renderer>();
-        arm1Rend = arm1.GetComponent<Renderer>();
-        arm2Rend = arm2.GetComponent<Renderer>();
-        storedColor = rend.material.GetColor("_Color");
-
-
+        bodyPart1 = bodyPart1_.GetComponent<Renderer>();
+        bodyPart2 = bodyPart2_.GetComponent<Renderer>();
+        storedColor1 = bodyPart1.material.GetColor("_Color");
+        storedColor2 = bodyPart2.material.GetColor("_Color");
 
     }
 
@@ -38,33 +40,35 @@ public class EnemyHealthManager : MonoBehaviour
         if(currentHealth <= 0) // Checking for death
         {
             GameObject.Find("GameManager").GetComponent<GameManagment>().enemyCounter(-1);
-            GameObject.Find("GameManager").GetComponent<GameManagment>().EnenmyKill(); // Calls a function on the score script that adds 1 point to the score and displays it
+            GameObject.Find("GameManager").GetComponent<GameManagment>().EnenmyKill(); // Calls a function on the score script that adds 1 point to the score
 
+            Instantiate(deathParticles, gameObject.transform.position, Quaternion.identity);
 
-            //Destroy(gameObject); // Destroys this enemy
+            Destroy(gameObject); // Destroys this enemy
 
         }
 
-        if (flashCounter > 0) // this changes the colour of the enemy back to normal after the set amount of time
+        if (flashCounter > 0) // this changes the colour of the head back to normal after the set amount of time
         {
             flashCounter -= Time.deltaTime;
             if (flashCounter <= 0)
             {
-                rend.material.SetColor("_Color", storedColor);
-                arm1Rend.material.SetColor("_Color", storedColor);
-                arm2Rend.material.SetColor("_Color", storedColor);
-                
+                bodyPart1.materials[0].SetColor("_Color", storedColor1);
+                bodyPart1.materials[1].SetColor("_Color", storedColor1);
+                bodyPart2.material.SetColor("_Color", storedColor2);
+
+
             }
         }
     }
 
     public void HurtEnemy() // this is called from the bullet script, after the bullet colides with the enemy.
     {
+        Debug.Log("hurt");
         currentHealth -= 1;
         flashCounter = flashLengh; // triggers a countdown to get the 
-        rend.material.SetColor("_Color", Color.red); // this changes the colour of the enemy to red 
-        arm1Rend.material.SetColor("_Color", Color.red);
-        arm2Rend.material.SetColor("_Color", Color.red);
-
+        bodyPart1.materials[0].SetColor("_Color", Color.red); // this changes the colour of the head to red
+        bodyPart1.materials[1].SetColor("_Color", Color.red);
+        bodyPart2.material.SetColor("_Color", Color.red);
     }
 }

@@ -10,7 +10,6 @@ public class ShooterControler : MonoBehaviour
 
     public float waitTime;
     private float currentTime;
-    private bool shot;
     public Transform firePoint;
     public BulletController bullet;
     public float bulletSpeed;
@@ -27,9 +26,9 @@ public class ShooterControler : MonoBehaviour
        thePlayer = FindObjectOfType<PlayerController>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.LookAt(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z));
+        rotate();
         currentTime += Time.deltaTime;
 
         if (currentTime >= 8) // Resets the timers
@@ -43,7 +42,7 @@ public class ShooterControler : MonoBehaviour
         if (currentTime <= 8 & currentTime > 5) // Moving state
         {
             myRB.velocity = (transform.forward * 4);
-            transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time)/frequency)/range) +height, transform.position.z);
+            myRB.MovePosition(transform.position = new Vector3(transform.position.x, (Mathf.Sin((Time.time) / (frequency)) / range) + height, transform.position.z));
         }
 
         if (currentTime <= 5) // shooting state
@@ -57,6 +56,13 @@ public class ShooterControler : MonoBehaviour
             myRB.velocity = Vector3.zero;
             myRB.angularVelocity = Vector3.zero;
         }
+    }
+
+    void rotate()
+    {
+        var qTo = Quaternion.LookRotation(new Vector3(thePlayer.transform.position.x, transform.position.y, thePlayer.transform.position.z) - transform.position);
+        qTo = Quaternion.Slerp(transform.rotation, qTo, 100f * Time.deltaTime);
+        myRB.MoveRotation(qTo);
     }
 
     public void Shoot() // Shooting function that creates the bullet prefab at the firepoint

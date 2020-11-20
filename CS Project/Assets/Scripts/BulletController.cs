@@ -32,4 +32,10 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Destroy(gameObject);
+    }
+
 }

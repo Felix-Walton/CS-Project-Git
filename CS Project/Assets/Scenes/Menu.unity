@@ -46524,7 +46524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1116542110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46581,7 +46581,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: f052fdd5b06a74c419ef5a600996eb60, type: 3}
-    m_FontSize: 19
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
@@ -46592,8 +46592,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Warning: The in the web build the fullscreen and resolution options do
-    not function, as well as the exit buttons.'
+  m_Text: 'Warning: The in the web build the resolution option and quit button do
+    not function'
 --- !u!222 &1116542113
 CanvasRenderer:
   m_ObjectHideFlags: 0
